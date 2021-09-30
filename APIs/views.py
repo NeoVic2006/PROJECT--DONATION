@@ -10,6 +10,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 # Create your views here.
 
+
 @csrf_exempt
 def Users_list(request):
     if request.method == "GET":
@@ -26,6 +27,7 @@ def Users_list(request):
             return JsonResponse(serializer.data, status=200)
         return JsonResponse(serializer.errors, status=400)
 
+
 @csrf_exempt
 def Donation_list(request):
     if request.method == "GET":
@@ -41,6 +43,7 @@ def Donation_list(request):
             serializer.save()
             return JsonResponse(serializer.data, status=200)
         return JsonResponse(serializer.errors, status=400)
+
 
 @csrf_exempt
 def DonationsManagement_list(request):

@@ -8,10 +8,10 @@ class User(models.Model):
     """"
     The user of the Donation System
     """
-    firstName = models.CharField(max_length=50, null= False)
-    lastName = models.CharField(max_length=100, null= False)
-    email = models.EmailField(max_length = 254, null=True)
-    role = models.CharField(max_length=50 , null = False)
+    firstName = models.CharField(max_length=50, null = False)
+    lastName = models.CharField(max_length=100, null = False)
+    email = models.EmailField(max_length = 254, null =True)
+    role = models.CharField(max_length=50 , null = False)  # this should be True
     
     def __str__(self):
         return self.firstName
@@ -37,7 +37,7 @@ class DonationsManagement(models.Model):
     donationType = models.ForeignKey(Donation, on_delete=CASCADE)
     amount = models.IntegerField(null = False, default = 0)
     date = models.DateTimeField(auto_now_add=True)
-    userName = models.ForeignKey(User, on_delete=CASCADE, default=2)
+    userName = models.ForeignKey(User, on_delete=CASCADE)
 
     def __str__(self):
         return str(self.donationType)
