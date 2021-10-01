@@ -8,13 +8,16 @@ class User(models.Model):
     """"
     The user of the Donation System
     """
-    firstName = models.CharField(max_length=50, null = False)
-    lastName = models.CharField(max_length=100, null = False)
+    firstName = models.CharField(max_length=50, null = True)
+    lastName = models.CharField(max_length=100, null = True)
     email = models.EmailField(max_length = 254, null =True)
-    role = models.CharField(max_length=50 , null = False)  # this should be True
+    role = models.CharField(max_length=50 , null = True)  # this should be True
     
     def __str__(self):
-        return self.firstName
+        # return self.firstName  commented out to get an id made so I can have id for edit users form to be able to trace user
+        return self.id
+
+
 
 
 class Donation(models.Model):
