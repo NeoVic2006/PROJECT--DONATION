@@ -1,14 +1,14 @@
-from django.db.models import manager
-from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from rest_framework import serializers, viewsets
+from rest_framework.response import Response
+from rest_framework.decorators import api_view
 from rest_framework.parsers import JSONParser
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 from .models import User, Donation, DonationsManagement
 from .serializers import UserSerialiser, DonationSerialiser, DonationsManagementSerialiser
 from django.views.decorators.csrf import csrf_exempt
-
+from rest_framework.reverse import reverse
 # Create your views here.
 
 
@@ -27,6 +27,13 @@ def Users_list(request):
             serializer.save()
             return JsonResponse(serializer.data, status=200)
         return JsonResponse(serializer.errors, status=400)
+
+
+@api_view(['GET'])
+def user_details(request, pk):
+    user = User.objects.get(id=pk)
+    serializer = UserSerialiser(user, many=False)
+    return Response(serializer.data)    
 
 
 @csrf_exempt
@@ -69,3 +76,4 @@ class UserViewSet(viewsets.ModelViewSet):
     serializer_class = UserSerialiser
     authentication_classes = {TokenAuthentication, }
     permission_classes = {IsAuthenticated, }
+
