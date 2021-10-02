@@ -58,7 +58,3 @@ class DonationsManagement(models.Model):
     def __str__(self):
         return str(self.donationType)
 
-
-    # SECTOR_CHOICES = (('E', 'East'), ('W', 'West'))
-    # name = models.CharField(max_length=50, null= False)
-    # sector = models.CharField(choices = SECTOR_CHOICES, max_length = 4,default = 'East')
