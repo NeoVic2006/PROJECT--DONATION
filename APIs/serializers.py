@@ -8,7 +8,7 @@ from .models import User, Donation, DonationsManagement
 class UserSerialiser(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['firstName', 'lastName', 'email', 'role']
+        fields = ['username', 'first_name', 'last_name', 'email', 'password', 'role']
     
 
 class DonationSerialiser(serializers.ModelSerializer):
