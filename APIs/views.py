@@ -13,7 +13,7 @@ from rest_framework.reverse import reverse
 
 
 @csrf_exempt
-def Users_list(request):
+def Users_list(request, id=0):
     if request.method == "GET":
         users = User.objects.all()
         serializer = UserSerialiser(users, many=True)
@@ -25,8 +25,26 @@ def Users_list(request):
 
         if serializer.is_valid():
             serializer.save()
-            return JsonResponse(serializer.data, status=200)
-        return JsonResponse(serializer.errors, status=400)
+            return JsonResponse("Added Successfully!!", safe=False)
+        return JsonResponse("Failed to Add.", safe=False)
+    
+    elif request.method == "PUT":
+        user_data = JSONParser().parse(request)
+        user = User.objects.get(id=user_data['id'])
+        serializer = UserSerialiser(user, data=user_data)
+
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse("Updated Successfully!!", safe=False)
+        return JsonResponse("Failed to Update.", safe=False)
+
+    elif request.method == "DELETE":
+        user = User.objects.get(id = id)
+        user.delete()
+        return JsonResponse("Delete Succesfully!", safe = False)
+
+
+
 
 
 @api_view(['GET'])
@@ -74,6 +92,5 @@ def DonationsManagement_list(request):
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerialiser
-    authentication_classes = {TokenAuthentication, }
-    permission_classes = {IsAuthenticated, }
-
+    #authentication_classes = {TokenAuthentication, }
+    #permission_classes = {IsAuthenticated, }

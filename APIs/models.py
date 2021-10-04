@@ -10,6 +10,7 @@ class User(AbstractUser):
     The user of the Donation System
     """
     ROLE_CHOICES = (('admin', 'admin'), ('user', 'user'))
+    id = models.AutoField(primary_key=True)
     username = models.CharField(max_length=50, unique = True, null = False)
     first_name = models.CharField(max_length=50, null = False)
     last_name = models.CharField(max_length=100, null = True)

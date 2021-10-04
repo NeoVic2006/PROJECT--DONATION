@@ -8,7 +8,8 @@ router = routers.DefaultRouter()
 router.register(r'users', UserViewSet)
 
 urlpatterns = [
-    path('Users/', Users_list),
+    path('users/', Users_list),
+    path('users/<int:pk>', Users_list),
     path('Donation/', Donation_list),
     path('DonationsManagement/', DonationsManagement_list),
     path('user_details/<str:pk>/', user_details , name='user_details'),
