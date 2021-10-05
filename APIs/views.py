@@ -84,8 +84,8 @@ def DonationsManagement_list(request):
 
         if serializer.is_valid():
             serializer.save()
-            return JsonResponse(serializer.data, status=200)
-        return JsonResponse(serializer.errors, status=400)
+            return JsonResponse("Added Successfully!!", safe=False)
+        return JsonResponse("Failed to Add.", safe=False)
 
 
 
