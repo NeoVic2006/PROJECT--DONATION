@@ -43,7 +43,7 @@ class Donation(models.Model):
     description = models.CharField(max_length=500, null= True)
 
     def __str__(self):
-        return self.donationName    
+        return self.donationName
 
 
 
@@ -55,6 +55,12 @@ class DonationsManagement(models.Model):
     amount = models.IntegerField(null = False, default = 0)
     date = models.DateTimeField(auto_now_add=True)
     userName = models.ForeignKey(User, on_delete=CASCADE)
+
+    def user_name(self):
+        return self.userName.username
+
+    def donation_type(self):
+        return self.donationType.donationName
 
     def __str__(self):
         return str(self.donationType)
