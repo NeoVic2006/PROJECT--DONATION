@@ -42,6 +42,9 @@ class Donation(models.Model):
     donationName = models.CharField(max_length=50, null= False)
     description = models.CharField(max_length=500, null= True)
 
+    def donationId(self):
+        return self.id
+
     def __str__(self):
         return self.donationName
 
@@ -49,7 +52,7 @@ class Donation(models.Model):
 
 class DonationsManagement(models.Model):
     """
-    Donation Mangement API
+    Donation Management API
     """
     donationType = models.ForeignKey(Donation, on_delete=CASCADE)
     amount = models.IntegerField(null = False, default = 0)
